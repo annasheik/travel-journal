@@ -108,3 +108,45 @@ h3 {
 .img-container img {
 	width: 75%;
 }
+
+/* LOGIN PAGE */
+.login-screen {
+	text-align: center;
+}
+fieldset {
+	border: none;
+}
+.login-header {
+	border-bottom: 2px solid #000;
+    margin-top: 72px;
+    font-size: 36px;
+    width: 73%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 52px;
+}
+
+input[type="email"], input[type="password"] {
+	display: block;
+    width: 322px;
+    padding: 5px;
+    margin: 10px auto 20px auto;
+    font-size: 18px;
+    border: 2px solid #e6e6e6;
+    background-color: #f2f2f2;
+}
+label {
+	font-size: 18px;
+}
+.js-login-button {
+	width: 106px;
+    padding: 3px;
+    background-color: #f2f2f2;
+      transition: background-color 0.5s ease;
+
+}
+.js-login-button:hover {
+	cursor: pointer;
+	background-color: #a9a9a9bf;
+}
+

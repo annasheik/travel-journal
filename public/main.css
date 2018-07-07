@@ -1,0 +1,110 @@
+* {
+	box-sizing: border-box;
+
+}
+
+/* HEADER*/
+.logo-bar {
+	background-color: black;
+	height: 36px;
+	text-align: center;
+	width: 100%;
+	text-decoration: none;
+}
+h1 {
+	color: white;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.home-button {
+	position: absolute;
+    top: 5px;
+    left: 11px;
+    z-index: 100;
+}
+.home-button a {
+	color: #c3c3c3a6;
+}
+i.fa.fa-home {
+	font-size: 26px;
+}
+
+/*NAVIGATION BAR */
+.nav-1 {
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	border-bottom: 1px solid #E5E5E5;
+	
+}
+.nav-1 a {
+	text-decoration: none;
+	font-style: normal;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 36px;
+    color: black;
+}
+.nav-1 a:hover {
+	text-decoration: underline;
+	color: black;
+	cursor: pointer;
+}
+.nav-link {
+	display: inline-block;
+	border: 1px solid #E5E5E5;
+    border-top: 0;
+    border-bottom: 0;
+    height:36px;
+    font-size: 1em;
+    width: 20%;
+    margin-right: -5px;
+}
+
+/* BANNER PHOTO */
+.banner-photo {
+	background: url(https://images.pexels.com/photos/458555/pexels-photo-458555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) no-repeat center top;
+    height: 734px;
+    background-size: 100%;
+    text-align: center
+}
+.main-title {
+	padding-top: 145px;
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+}
+.signup-button {
+	border: 3px white solid;
+	width: 209px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 12px;
+    padding-bottom: 11px;
+}
+.signup-button a {
+	text-decoration: none;
+	font-size: 30px;
+	color: white;
+	text-transform: uppercase;
+}
+
+/* MAIN*/
+.website-description {
+	text-align: center;
+}
+.website-description p {
+	font-size: 24px;
+    font-style: italic;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+h3 {
+	font-size: 30px;
+}
+.img-container {
+	text-align: center;
+}
+.img-container img {
+	width: 75%;
+}

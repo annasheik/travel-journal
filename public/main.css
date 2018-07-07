@@ -109,8 +109,8 @@ h3 {
 	width: 75%;
 }
 
-/* LOGIN PAGE */
-.login-screen {
+/* LOGIN PAGE  and SIGNUP PAGE*/
+.login-screen, .signup-page-screen {
 	text-align: center;
 }
 fieldset {
@@ -138,15 +138,16 @@ input[type="email"], input[type="password"] {
 label {
 	font-size: 18px;
 }
-.js-login-button {
+.js-login-button, .js-signup-button {
 	width: 106px;
     padding: 3px;
     background-color: #f2f2f2;
       transition: background-color 0.5s ease;
 
 }
-.js-login-button:hover {
+.js-login-button:hover, .js-signup-button:hover {
 	cursor: pointer;
 	background-color: #a9a9a9bf;
 }
+
 

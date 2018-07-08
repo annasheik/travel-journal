@@ -211,7 +211,7 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
     border: none;
     border-bottom: 1px solid gray;
 }
-.save, .cancel {
+.save, .cancel, .edit, .delete {
 	width: 99px;
     border: none;
     cursor: pointer;
@@ -222,6 +222,55 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
     margin-right: -5px;
     margin-bottom: 20px;
 }
-.save-delete {
+.save-delete, .edit-delete {
 	margin-top: -52px;
 }
+ /* EACH INDIVIDUAL ENTRY */
+.journal-entry {
+	text-align: center;
+
+}
+.entry-title {
+	width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-size: 22px;
+    font-style: italic;
+}
+.main-photo {
+	max-width: 100%;
+    /*object-fit: contain;*/
+    height: 400px;   
+}
+.main-entry-photo {
+    height: 400px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;
+    margin-bottom: 15px;
+}
+.main-entry-description, .main-best-memory, .main-foreign-words, div.more-photos {
+	margin-top: 83px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.p-entry {
+	text-align: left;
+}
+h5 {
+	text-align: left;
+    font-size: 17px;
+    font-style: italic;
+}
+img.more-photos {
+	width: 600px;
+
+}
+
+
+
+
+

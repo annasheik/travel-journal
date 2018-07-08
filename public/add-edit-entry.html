@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Travel e-Journal</title>
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="utf-8">
+	<meta name="description" content="Create a beautiful travel journal">
+	<meta name="keywords" content="travel journal, online travel journal, travel diary, online travel
+	diary, travel blog">
+	<meta name="author" content="Anna Kremer">
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<header role="banner">
+		<div class="logo-bar">
+			<div class="home-button"><a href=""><i class="fa fa-home"></i></a> </div>
+			<h1>Travel e-Journal</h1>
+		</div>
+	</header>
+
+	<div class="nav-bar">
+		<div class="nav-1">
+			<div class="nav-link"><a href="">Log In</a></div>
+			<div class="nav-link"><a href="">Sign Up</a></div>
+			<div class="nav-link"><a href="">Bucket List</a></div>
+		</div>
+	</div>
+	
+	<main role="main" class="edit-journal-entry">
+		<div class="dashboard-header">
+			<h2>Edit My Journal</h2>
+		</div>
+		<div class="save-delete">
+			<button class="save" id="js-save-button">Save</button>
+			<button class="cancel" id="js-cancel-button">Cancel</button>
+		</div>
+		<section class="edit-entry">
+			<div class="entry-title">
+				<input type="text" name="journal-title" id="journal-title" placeholder="Name your trip here" maxlength="70" type="text" value="Name your trip here">
+			</div>
+			<div class="entry-photo"><a href="">Add a cover photo</a></div>
+			<div class="entry-description">
+				<input type="text" name="entry-description" id="journal-description" placeholder="Add description of your trip here..." value="Add description of your trip here..">
+			</div>
+			<div class="best-memory">
+				<input type="text" name="best-memory" id="entry-best-memory" placeholder="Share your best memory of the trip..." value="Share your best memory of the trip...">
+			</div>
+			<div class="foreign-words">
+				<input type="text" name="foreign-words" id="entry-foreign-words" placeholder="Keep the new foreign words learned here..." value="Keep the new foreign words learned here...">
+			</div>
+			<div class="more-photos">
+				<p>Add more photos here</p>>
+				<input type="file" name="pic" accept="image/*">
+				<input type="submit">
+			</div>
+		</section>	
+	</main>
+
+</body>
+</html>

@@ -173,7 +173,7 @@ label {
     padding-top: 200px;
 
 }
-.entry a {
+.entry a,  .entry-photo a{
 	color: black;
     font-size: 38px;
     text-decoration: none;
@@ -184,4 +184,44 @@ h4 {
 	font-style: italic;
 }
 
-
+/*ADD/EDIT ENTRY SCREEN */
+.edit-journal-entry {
+	text-align: center;
+}
+input#journal-title {
+	width: 500px;
+    border: none;
+    font-size: 22px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+.entry-photo {
+	background-color: #F2F2F2;
+    height: 400px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 200px;
+    margin-bottom: 15px;
+}
+input#journal-description, input#entry-best-memory, input#entry-foreign-words {
+	width: 500px;
+    height: 75px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.save, .cancel {
+	width: 99px;
+    border: none;
+    cursor: pointer;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    font-size: 21px;
+    text-transform: uppercase;
+    margin-right: -5px;
+    margin-bottom: 20px;
+}
+.save-delete {
+	margin-top: -52px;
+}

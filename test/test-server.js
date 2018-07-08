@@ -43,4 +43,30 @@ describe('static routes', function() {
 			expect(res).to.be.html;
 		})
 	})
+
+	it('should get user-dashboard.html', function() {
+		return chai.request(app)
+		.get('/user-dashboard.html')
+		.then(function(res) {
+			expect(res).to.have.status(200);
+			expect(res).to.be.html;
+		})
+	})
+
+	it('should get add-edit-entry.html', function() {
+		return chai.request(app)
+		.get('/add-edit-entry.html')
+		.then(function(res) {
+			expect(res).to.have.status(200);
+			expect(res).to.be.html;
+		})
+	})
 })
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-
+'use strict';
 const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
@@ -20,6 +20,24 @@ describe('static routes', function() {
 	it('should get index.html', function() {
 		return chai.request(app)
 		.get('/')
+		.then(function(res) {
+			expect(res).to.have.status(200);
+			expect(res).to.be.html;
+		})
+	})
+
+	it('should get login.html', function() {
+		return chai.request(app)
+		.get('/login.html')
+		.then(function(res) {
+			expect(res).to.have.status(200);
+			expect(res).to.be.html;
+		})
+	})
+
+	it('should get signup.html', function() {
+		return chai.request(app)
+		.get('/signup.html')
 		.then(function(res) {
 			expect(res).to.have.status(200);
 			expect(res).to.be.html;

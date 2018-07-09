@@ -14,7 +14,7 @@ function renderLoginPage() {
 					<input type="password" name="password" id="password" placeholder="Password" required>
 				</fieldset>
 				<button type="submit" class="js-login-button">Login</button>
-				<p>Don't have an account? <a href="signup.html">Sign up</p></a>
+				<p>Don't have an account? <a href="" class ="nav-signup">Sign up</a></p>
 			</form>
 		</section> `
 }
@@ -26,12 +26,14 @@ function displayLoginPage() {
 }
 
 function handleLoginButton () {
-	$('.nav-1').on('click', '.nav-login', function(event) {
+	$('.main-area').on('click', '.nav-login', function(event) {
 		console.log('Login button clicked');
 		event.preventDefault();         // do we need it here??
 		displayLoginPage();
 	})
 }
+
+
 handleLoginButton();
 
 // SIGNUP PAGE
@@ -52,7 +54,7 @@ function renderSignupPage() {
 					<input type="password" name="password" id="password-confirm" placeholder="Confirm password" required >
 				</fieldset>
 				<button type="submit" class="js-signup-button">Sign up</button>
-				<p>Already have an account? <a href="">Log in</p></a>
+				<p>Already have an account? <a href="" class="nav-login">Log in</p></a>
 			</form>
 		</section>
 	`
@@ -65,7 +67,7 @@ function displaySignupPage() {
 }
 
 function handleSignUpButton() {
-	$('.nav-1').on('click','.nav-signup', function(event) {
+	$('.main-area').on('click','.nav-signup', function(event) {
 		console.log('SignUp button clicked');
 		event.preventDefault();
 		displaySignupPage();
@@ -77,12 +79,44 @@ handleSignUpButton();
 
 // USER DASHBOARD PAGE
 function renderUserDashboard() {
-
+	return `
+	<div class="nav-bar">
+		<div class="nav-1">
+			<div class="nav-link"><a href="">My Jornal</a></div>
+			<div class="nav-link"><a href="">Log out</a></div>
+			<div class="nav-link"><a href="">Bucket List</a></div>
+		</div>
+	</div>
+	
+	<main role="main" class="user-dashboard">
+		<div class="dashboard-header">
+			<h2>My trips</h2>
+		</div>
+		<section class="trip-entries">
+			<h4>Let the journey begin!</h4>
+			<div class="entry"><a>Add my first trip</a></div>
+		</section>	
+	`
 }
 
 function displayUserDashboard() {
-
+	const userDashboard = renderUserDashboard();
+	$('.landing-page').prop('hidden', true);
+	$('.main-nav-bar').prop('hidden', true);
+	$('.main-area').html(userDashboard);
 }
+
+function handleLoginSuccess() {
+	$('#main-page').on('click', '.js-login-button', function(event) { //WHY SUBMIT DOESNt work??
+		console.log('Login Success');
+		event.preventDefault();
+		displayUserDashboard();
+	});
+}
+ handleLoginSuccess();
+
+
+
 
 function renderAddEditEntry (entry=null) {
 

@@ -8,7 +8,10 @@
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
-	<script type="text/javascript" src="main.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+	<!-- <script type="text/javascript" src="datastore.js"></script> -->
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta charset="utf-8">
 	<meta name="description" content="Create a beautiful travel journal">
@@ -21,36 +24,45 @@
 <body>
 	<header role="banner">
 		<div class="logo-bar">
-			<div class="home-button"><a href="index.html"><i class="fa fa-home"></i></a> </div>
+			<div class="home-button"><a href=><i class="fa fa-home"></i></a> </div>
 			<h1>Travel e-Journal</h1>
 		</div>
 	</header>
 
 	<div class="nav-bar">
 		<div class="nav-1">
-			<div class="nav-link login-nav"><a href="login.html">Log In</a></div>
-			<div class="nav-link"><a href="signup.html">Sign Up</a></div>
+			<div class="nav-link"><a class="nav-login" href="">Log In</a></div>
+			<div class="nav-link"><a href="" class="nav-signup">Sign Up</a></div>
 		</div>         
 	</div>
 	
-	<main role="main">
+	<!--  LANDING PAGE -->
 
-		<div class="banner-photo">
-			<h2 class="main-title">The memories that last forever</h2>
-			<div class="signup-button"><a href="signup.html">Sign Up</a></div>
-		</div>
-
-		<section class="website-description">
-			<h3>Save your travel experiences</h3>
-			<p>Create a beautiful Travel Journal online. Save your travel experiences and never loose the 
-			photos and memories.</p>
-			<div class="img-container">
-				<img src="https://images.pexels.com/photos/356808/pexels-photo-356808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+	<main role="main" id="main-page">
+		<div class="landing-page">
+			<div class="banner-photo">
+				<h2 class="main-title">The memories that last forever</h2>
+				<div class="signup-button"><a href="signup.html">Sign Up</a></div>
 			</div>
-			<h3>Travel Journal is something you'll treasure forever</h3>
 
-		</section>
+			<section class="website-description">
+				<h3>Save your travel experiences</h3>
+				<p>Create a beautiful Travel Journal online. Save your travel experiences and never loose the 
+				photos and memories.</p>
+				<div class="img-container">
+					<img src="https://images.pexels.com/photos/356808/pexels-photo-356808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+				</div>
+				<h3>Travel Journal is something you'll treasure forever</h3>
+			</section>
+	</div>
 	</main>
 
+	<!--    LOGIN PAGE    -->
+	<main role="main" id="login-page" hidden aria-live="assertive">
+
+	
+
+	</main>
+<script type="text/javascript" src="main.js"></script>
 </body>
 </html>

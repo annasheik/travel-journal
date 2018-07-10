@@ -82,9 +82,9 @@ function renderUserDashboard() {
 	return `
 	<div class="nav-bar">
 		<div class="nav-1">
-			<div class="nav-link"><a href="">My Jornal</a></div>
+			<div class="nav-link"><a href="" class='my-journal-button'>My Journal</a></div>
+			<div class="nav-link"><a href="" class="plus">&#43;</a></div>
 			<div class="nav-link"><a href="">Log out</a></div>
-			<div class="nav-link"><a href="">Bucket List</a></div>
 		</div>
 	</div>
 	
@@ -94,7 +94,7 @@ function renderUserDashboard() {
 		</div>
 		<section class="trip-entries">
 			<h4>Let the journey begin!</h4>
-			<div class="entry"><a>Add my first trip</a></div>
+			<div class="entry"><a href=""class="js-edit-entry">Add my first trip</a></div>
 		</section>	
 	`
 }
@@ -115,17 +115,85 @@ function handleLoginSuccess() {
 }
  handleLoginSuccess();
 
+// MY JOURNAL
+function handleMyJournalButton() {
+	$('.main-area').on('click', '.my-journal-button', function(event) {
+		console.log('My Journal button clicked');
+		event.preventDefault();
+		$('.landing-page').prop('hidden', true);
+		displayUserDashboard();
+	});
+}
+handleMyJournalButton();
 
-
+// ADD or EDIT ENTRY
 
 function renderAddEditEntry (entry=null) {
-
+	return `
+		<div class="nav-bar">
+		<div class="nav-1">
+			<div class="nav-link"><a href="" class="my-journal-button">My Journal</a></div>
+			<div class="nav-link"><a href="" class="plus">&#43;</a></div>
+			<div class="nav-link"><a href="">Log Out</a></div>
+		</div>
+	</div>
+	
+	<main role="main" class="edit-journal-entry">
+		<div class="dashboard-header">
+			<h2>Edit My Journal</h2>
+		</div>
+		<div class="save-delete">
+			<button class="save" id="js-save-button">Save</button>
+			<button class="cancel" id="js-cancel-button">Cancel</button>
+		</div>
+		<section class="edit-entry">
+			<div class="entry-title">
+				<input type="text" name="journal-title" id="journal-title" placeholder="Name your trip here" maxlength="70" type="text" value="Name your trip here">
+			</div>
+			<div class="entry-photo"><a href="">Add a cover photo</a></div>
+			<div class="entry-description">
+				<input type="text" name="entry-description" id="journal-description" placeholder="Add description of your trip here..." value="Add description of your trip here..">
+			</div>
+			<div class="best-memory">
+				<input type="text" name="best-memory" id="entry-best-memory" placeholder="Share your best memory of the trip..." value="Share your best memory of the trip...">
+			</div>
+			<div class="foreign-words">
+				<input type="text" name="foreign-words" id="entry-foreign-words" placeholder="Keep the new foreign words learned here..." value="Keep the new foreign words learned here...">
+			</div>
+			<div class="more-photos">
+				<p>Add more photos here</p>>
+				<input type="file" name="pic" accept="image/*">
+				<input type="submit">
+			</div>
+		</section>	
+	</main>
+	`
 }
 
 function displayAddEditEntry(entry=null) {
-
+	const entryEditor = renderAddEditEntry();
+	$('.landing-page').prop('hidden', true);
+	$('.main-nav-bar').prop('hidden', true);
+	$('.main-area').html(entryEditor);
 }
 
+function handleAddEditButtons() {
+	$('.main-area').on('click', '.js-edit-entry', function(event) {
+		console.log('Add entry clicked');
+		event.preventDefault();
+		displayAddEditEntry();
+	})
+}
+handleAddEditButtons();
+
+function handlePlusButton() {
+	$('.main-area').on('click', '.plus', function(event) {
+		console.log('Plus button clicked');
+		event.preventDefault();
+		displayAddEditEntry();
+})
+}
+handlePlusButton();
 
 // why does it work by default???
 function handleHomeButton() {

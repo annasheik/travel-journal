@@ -1,60 +1,73 @@
 const uuid = require('uuid');
+const faker = require('faker');
 
 
-let entries = [];
+function StorageException(message) {
+   this.message = message;
+   this.name = "StorageException";
+}
 
-function createEntry(title, coverPhoto, description, memories, words, morePhotos, callback) {
 
-	const myEntry = {
+const JournalEntries = {
+
+	create: function(title, travelDate, coverPhoto, description, memories, words, morePhotos) {
+
+	const entry = {
        id: uuid(),
        title,
+       travelDate,
        coverPhoto,
        description,
        memories,
        words,
        morePhotos
 	}
-	entries.push(myEntry);
-	callback(myEnt\
-		ry);
+	this.entries.push(entry);
+	return entry;
+},
+
+get:  function(id=null) {
+//if id passed in, retrieve a single entry
+// otherwise send all entries
+if( id !== null) {
+	return this.entries.find(entry => entry.id === id);
+}
+return this.entries.sort(function(a,b) {
+	return b.travelDate - a.travelDate;
+});
+},
+
+delete: function(id) {
+	const entryIndex = this.entries.findIndex(
+		entry => entry.id === id);
+	if (entryIndex > -1) {
+		this.entries.splice(entryIndex, 1);
+	}
+},
+
+
+update: function(newEntry) {  
+	const {id} = newEntry;
+	const index = this.entries.findIndex(function(item) {
+		return item.id === newEntry.id;
+	});
+if (index === -1) {
+	throw new StorageException(`Can't update item ${id}  because it doesn't exist`);
+}
+this.entries[index] = Object.assign(
+	this.entries[index], newEntry);
+return this.entries[index];
+}
 };
 
-function getEntries(callback) {
-	callback(entries);
-}
-
-function getEntry(id, callback) {
-	const entry = entries.find(function(item) {
-		return item.id === id;
-	});
-	callback(entry);
-}
-
-function deleteEntry(id, callback) {
-	const filteredArray = entries.filter(function(item) {
-		return item.id !== id;
-	});
-
-	entries = filteredArray;
-	callback();
+function createJournalEntryModel() {
+	const storage = Object.create(JournalEntries);
+	storage.entries = [];
+	return storage;
 }
 
 
-function updateEntry (id, newEntry, callback) {  
-	const index = entries.findIndex(function(item) {
-		return item.id === id;
-	});
-	newEntry.id = id;
-	entries[index] = newEntry;
-	callback(newEntry);
 
-}
-
-
-for (let i=1; i<= 5; i++) {
-	createEntry(faker.lorem.words(), faker.image.imageUrl(), faker.lorem.paragraph(),faker.lorem.sentence(), 
-		faker.lorem.words(), [faker.image.imageUrl()]);
-}
 
 let user = null;
 let loggedIn = false;
@@ -75,4 +88,5 @@ function login(username, password, callback) {
 	else { callback(null)};
 }
 
+module.exports = {JournalEntries: createJournalEntryModel()};
 

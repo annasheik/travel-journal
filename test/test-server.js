@@ -26,41 +26,7 @@ describe('static routes', function() {
 		})
 	})
 
-	it('should get login.html', function() {
-		return chai.request(app)
-		.get('/login.html')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-			expect(res).to.be.html;
-		})
-	})
-
-	it('should get signup.html', function() {
-		return chai.request(app)
-		.get('/signup.html')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-			expect(res).to.be.html;
-		})
-	})
-
-	it('should get user-dashboard.html', function() {
-		return chai.request(app)
-		.get('/user-dashboard.html')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-			expect(res).to.be.html;
-		})
-	})
-
-	it('should get add-edit-entry.html', function() {
-		return chai.request(app)
-		.get('/add-edit-entry.html')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-			expect(res).to.be.html;
-		})
-	})
+	
 })
 
 

@@ -150,6 +150,10 @@ function renderAddEditEntry (entry=null) {
 			<div class="entry-title">
 				<input type="text" name="journal-title" id="journal-title" placeholder="Name your trip here" maxlength="70" type="text" value="Name your trip here">
 			</div>
+			<div class="etry-date">
+				<input type="text" name="travel-date" id="travel-date" placeholder="Enter the date of trip"
+				value="Enter the date of travel">
+			</div>
 			<div class="entry-photo"><a href="">Add a cover photo</a></div>
 			<div class="entry-description">
 				<input type="text" name="entry-description" id="journal-description" placeholder="Add description of your trip here..." value="Add description of your trip here..">

@@ -194,14 +194,14 @@ ul {
 	text-align: center;
 }
 input#journal-title {
-	width: 500px;
+	width: 600px;
     border: none;
     font-size: 22px;
     border-bottom: 1px solid gray;
     margin-bottom: 45px;
 }
 input#travel-date {
-    width: 500px;
+    width: 600px;
     border: none;
     font-size: 15px;
     border-bottom: 1px solid gray;
@@ -211,14 +211,14 @@ input#travel-date {
 .entry-photo {
 	background-color: #F2F2F2;
     height: 400px;
-    width: 500px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding-top: 200px;
     margin-bottom: 15px;
 }
 input#journal-description, input#entry-best-memory, input#entry-foreign-words {
-	width: 500px;
+	width: 600px;
     height: 75px;
     margin-bottom: 15px;
     border: none;

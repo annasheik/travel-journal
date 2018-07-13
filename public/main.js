@@ -237,9 +237,6 @@ function handleEditButton() {
 	})
 }
 
-
-
-
 function renderEachEntry(entry) {
 		console.dir(entry);
 	return `
@@ -299,7 +296,6 @@ function displayEachEntry(entry) {
 
 function getEachEntry(id) {
 	console.log(id);
-	console.log('Hello')
 	journalEntriesStorage.get(displayEachEntry, id);
 }
 
@@ -311,10 +307,31 @@ function handleEntryClick() {
  	})
 }
 
+//CANCEL BUTTON
+function handleCancelButton() {
+	$('.main-area').on('click', '#js-cancel-button', function() {
+		console.log('Cancel button clicked');
+		$('.landing-page').prop('hidden', true);
+		getUserDashboard();
+	})
+}
+
+//DELETE button
+function deleteEntry(id) {
+	journalEntriesStorage.delete(getUserDashboard, id);
+}
+
+function handleDeleteButton() {
+	$('.main-area').on('click', '#js-delete-button', function() {
+		console.log('Delete button clicked');
+		const id = $(this).data('entryid');
+		deleteEntry(id);
+
+	})
+}
 
 
 function setUpEventHandlers() {
-	console.log("Setting up event handlers")
 	handleLoginButton();
 	handleSignUpButton();
 	handleLoginSuccess();
@@ -322,7 +339,9 @@ function setUpEventHandlers() {
 	handleAddEditButtons();
 	handleSignUpSuccess();
 	handleEntryClick();
-	handleEditButton()
+	handleEditButton();
+	handleCancelButton();
+	handleDeleteButton();
 }
 
 

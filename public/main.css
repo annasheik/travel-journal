@@ -182,6 +182,11 @@ label {
 }
 h4 {
 	font-style: italic;
+    margin-top: -31px;
+    font-size: 23px;
+}
+ul {
+    list-style-type: none;
 }
 
 /*ADD/EDIT ENTRY SCREEN */
@@ -193,7 +198,7 @@ input#journal-title {
     border: none;
     font-size: 22px;
     border-bottom: 1px solid gray;
-    margin-bottom: 10px;
+    margin-bottom: 45px;
 }
 input#travel-date {
     width: 500px;
@@ -233,18 +238,22 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
 .save-delete, .edit-delete {
 	margin-top: -52px;
 }
+h5 a {
+    cursor: pointer;
  /* EACH INDIVIDUAL ENTRY */
+}
 .journal-entry {
 	text-align: center;
 
 }
 .entry-title {
-	width: 500px;
+	width: 600px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
     font-size: 22px;
     font-style: italic;
+    margin-top: 58px;
 }
 .main-photo {
 	max-width: 100%;
@@ -253,7 +262,7 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
 }
 .main-entry-photo {
     height: 400px;
-    width: 500px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding-top: 0px;
@@ -261,7 +270,7 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
 }
 .main-entry-description, .main-best-memory, .main-foreign-words, div.more-photos {
 	margin-top: 83px;
-    width: 700px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -282,7 +291,19 @@ img.more-photos {
     font-weight: 800;
 }
 
+/*List of entries */
+.entry-date {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    font-style: italic;
+    margin-top: -31px;
+}
 
-
-
+div.best-memory, div.foreign-words {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
 

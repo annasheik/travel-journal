@@ -15,10 +15,7 @@ let server;
 
 let title = faker.address.country();
 
-for (let i=1; i <= 5; i++) {
-JournalEntries.create(faker.address.country(), faker.date.past(), faker.image.imageUrl(), faker.lorem.paragraph(), faker.lorem.sentence(), 
-    faker.lorem.words(), [faker.image.imageUrl()]);
-};
+
 
 
 // GET request

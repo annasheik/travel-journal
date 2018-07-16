@@ -1,4 +1,20 @@
 'use strict';
+function uuid() {
+  var uuid = "", i, random;
+  for (i = 0; i < 32; i++) {
+    random = Math.random() * 16 | 0;
+
+    if (i == 8 || i == 12 || i == 16 || i == 20) {
+      uuid += "-"
+    }
+    uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+  }
+  return uuid;
+}
+
+
+
+
 // LOGIN PAGE
 function renderLoginPage() {
 	return `
@@ -95,7 +111,7 @@ function renderUserDashboard(journalEntries) {
 		<div class="nav-1">
 			<div class="nav-link"><a href="" class='my-journal-button'>My Journal</a></div>
 			<div class="nav-link"><a href="" class="js-edit-entry plus">&#43;</a></div>
-			<div class="nav-link"><a href="">Log out</a></div>
+			<div class="nav-link"><a href="" class="js-logout-button">Log out</a></div>
 		</div>
 	</div>
 	
@@ -112,7 +128,6 @@ function renderUserDashboard(journalEntries) {
       		 return ` <li><h5 class="entry-title"><a data-entryid="${entry.id}">${entry.title}</a></h5>
       		 <p class="entry-date">${entry.travelDate}</p>
       		 <div class="entry-list"><img class="main-entry-photo" src="${entry.coverPhoto}"></div>
-
       		 </li>`
 			}).join('\n') : ""}
 			</ul>
@@ -163,7 +178,7 @@ function renderAddEditEntry (entry=null) {
 		<div class="nav-1">
 			<div class="nav-link"><a href="" class="my-journal-button">My Journal</a></div>
 			<div class="nav-link"><a href="" class="js-edit-entry plus">&#43;</a></div>
-			<div class="nav-link"><a href="">Log Out</a></div>
+			<div class="nav-link"><a href="" class="js-logout-button">Log Out</a></div>
 		</div>
 	</div>
 	
@@ -171,9 +186,9 @@ function renderAddEditEntry (entry=null) {
 		<div class="dashboard-header">
 			<h2>Edit My Journal</h2>
 		</div>
-		<form class='create-entry'>
+		<form id="js-edit-form" ${entry ? `data-entryid="${entry.id}"` : ""}>
 		<div class="save-delete">
-			<button class="save" id="js-save-button">Save</button>
+			<button type = "submit" class="save" id="js-save-button">Save</button>
 			<button class="cancel" id="js-cancel-button">Cancel</button>
 		</div>
 		<section class="edit-entry">
@@ -185,7 +200,8 @@ function renderAddEditEntry (entry=null) {
 				<input type="text" name="travel-date" id="travel-date" placeholder="Enter the date of trip"
 				${entry ? `value="${entry.travelDate}"` : ""}>
 			</div>
-			<div class="entry-photo"><a href="">Add a cover photo</a></div>
+			<div class="entry-photo" id = "entry-photo">
+				<input type="file" accept=".jpg, .jpeg, .png" id="main-image" ${entry ? `value="${entry.coverPhoto}"` : ""}>
 			<div class="entry-description">
 				<input type="text" name="entry-description" id="journal-description" 
 				placeholder="Add description of your trip here..." ${entry ? `value="${entry.description}"` : ""}>
@@ -201,9 +217,9 @@ function renderAddEditEntry (entry=null) {
 				${entry ? `value="${entry.words}"` : ""}>
 			</div>
 			<div class="more-photos">
-				<p>Add more photos here</p>>
+				<p>Add more photos here</p>
 				<input type="file" name="pic" accept="image/*">
-				<input type="submit">
+				
 			</div>
 		</section>
 		</form>	
@@ -222,6 +238,7 @@ function displayAddEditEntry(entry=null) {
 function handleAddEditButtons() {
 	$('.main-area').on('click', '.js-edit-entry', function(event) {
 		console.log('Add entry clicked');
+		event.preventDefault();
 		
 		displayAddEditEntry();
 	})
@@ -244,7 +261,7 @@ function renderEachEntry(entry) {
 		<div class="nav-1">
 			<div class="nav-link"><a href="" class="my-journal-button">My Journal</a></div>
 			<div class="nav-link"><a href="" class="js-edit-entry plus">&#43;</a></div>
-			<div class="nav-link"><a href="">Log Out</a></div>
+			<div class="nav-link"><a href="" class="js-logout-button">Log Out</a></div>
 		</div>
 		</div>
 		<main role="main" class="journal-entry">
@@ -262,11 +279,11 @@ function renderEachEntry(entry) {
 			<p class="entry-date">${entry.travelDate}</p>
 			 <div class="entry-list"><img class="main-entry-photo" src="${entry.coverPhoto}"></div>
 			<div class="main-entry-description">
-				<p class="p-entry">${entry.description}</p>		
+				<p class="p-entry" id="p-entry">${entry.description}</p>		
 			</div>
 			<div class="main-best-memory">
 				<h5>Best memory</h5>
-				<p class="p-entry"> 
+				<p class="p-entry" id="js-memory"> 
 					${entry.memories}
 				</p>	
 			</div>
@@ -325,8 +342,68 @@ function handleDeleteButton() {
 	$('.main-area').on('click', '#js-delete-button', function() {
 		console.log('Delete button clicked');
 		const id = $(this).data('entryid');
-		deleteEntry(id);
+     	const result = confirm("Are you sure you want to delete this?");
+        if (result) {
+        deleteEntry(id);
+	}
+	})
+}
+// SAVE BUTTON
 
+function saveEntry(newEntry) {
+	console.log(newEntry);
+	journalEntriesStorage.update(getUserDashboard, newEntry);
+}
+ 
+function createEntry(title, travelDate, coverPhoto, description, memories,
+		words, morePhotos) {
+	journalEntriesStorage.create(getUserDashboard, title, travelDate, coverPhoto, description, memories,
+		words, morePhotos);
+}
+
+function handleSaveButton () {
+	$('.main-area').on('submit', '#js-edit-form', function(event) {
+		console.log('Save button clicked');
+		event.preventDefault();
+		let title = $('#journal-title').val();
+        let travelDate = $('#travel-date').val();
+        let coverPhoto = $('#main-image').val();
+        let description = $('#journal-description').val();
+        let memories = $('#entry-best-memory').val();
+        let words = $('#entry-foreign-words').val();
+        let morePhotos = ['', ''];
+
+		if ($(this).data("entryid") === undefined) {
+			createEntry(title, travelDate, coverPhoto, description, memories,
+		words, morePhotos);
+		}
+		else {
+	    id = $(this).data("entryid");
+	     
+		const newEntry = { 
+		id,
+		title,
+        travelDate,
+        coverPhoto,
+        description,
+        memories,
+        words,
+        morePhotos
+        }
+		saveEntry(newEntry);
+	}
+	})
+}
+
+// LOGOUT BUTTON
+function handleLogOutButton() {
+	$('.main-area').on('click', '.js-logout-button', function(event) {
+		event.preventDefault();
+		console.log('Logged out!')
+		const username = null;
+		const password = null;
+
+		location.reload();
 	})
 }
 
@@ -342,7 +419,9 @@ function setUpEventHandlers() {
 	handleEditButton();
 	handleCancelButton();
 	handleDeleteButton();
+	handleSaveButton();
 }
+
 
 
 

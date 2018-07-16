@@ -72,7 +72,7 @@ if (index === -1) {
 }
 this.entries[index] = Object.assign(
 	this.entries[index], newEntry);
-callback (this.entries[index]);
+callback ();
 }
 };
 

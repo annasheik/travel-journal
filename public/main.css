@@ -63,7 +63,7 @@ i.fa.fa-home {
 
 /* BANNER PHOTO */
 .banner-photo {
-	background: url(https://images.pexels.com/photos/458555/pexels-photo-458555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) no-repeat center top;
+	background: url(photos/banner-photo.jpeg) no-repeat center top;
     height: 734px;
     background-size: 100%;
     text-align: center
@@ -240,8 +240,14 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
 }
 h5 a {
     cursor: pointer;
- /* EACH INDIVIDUAL ENTRY */
 }
+
+div.entry-description {
+    margin-top: 219px;
+}
+ /* EACH INDIVIDUAL ENTRY */
+
+
 .journal-entry {
 	text-align: center;
 

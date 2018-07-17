@@ -24,10 +24,32 @@ let title = faker.address.country();
 
 // GET request
 app.get('/journal-entries', (req, res) => {
-  res.json(JournalEntries.get());
+  Entry
+  .find()
+  .then(entries => {
+    res.json({
+      entries: entries.map(
+        (entry) => entry.serialize())
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({message: 'Internal server error'})
+  });
 });
 
 // GET by id
+
+app.get('/journal-entries/:id', (req, res) => {
+  Entry
+    .findById(req.params.id)
+    .then(entry => res.json(entry.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
+
 
 //POST request
 app.post('/journal-entries', (req, res) => {
@@ -42,36 +64,8 @@ app.post('/journal-entries', (req, res) => {
       return res.status(400).send(message);
     }
   }
-  const entry = JournalEntries.create(req.body.title, req.body.travelDate, req.body.coverPhoto,
-    req.body.description, req.body.memories, req.body.words, req.body.morePhotos);
-  console.log(`Creating new journal entry ${req.body.title}`);
-  res.status(201).json(entry);
-
-})
-
-// PUT request
-app.put('/journal-entries/:id', (req, res) => {
-  //ensure the req has required fields
-  const requiredFields = ['title', 'travelDate', 'coverPhoto', 
-  'description', 'memories'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if (!(field in req.body)) {
-      const message = `Missing  ${field} field`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  }
-  //ensure that journal id in url path and req match
-  if (req.params.id !== req.body.id) {
-    const message = `Request path id ${req.params.id} and request body id ${req.body.id} must match`;
-    console.error(message);
-    return res.status(400).send(message);
-  }
-  //if everyting is ok, the entry will be updated
-    console.log(`Updating blog post ${req.params.id}`);
-    JournalEntries.update({
-      id: req.params.id,
+  Entry
+    .create({
       title: req.body.title,
       travelDate: req.body.travelDate,
       coverPhoto: req.body.coverPhoto,
@@ -79,15 +73,46 @@ app.put('/journal-entries/:id', (req, res) => {
       memories: req.body.memories,
       words: req.body.words,
       morePhotos: req.body.morePhotos
+    })
+    .then(entry => res.status(201).json(entry.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'})
     });
-    res.status(204).end(); //Can we return it???
-})
+});
+
+// PUT request
+app.put('/journal-entries/:id', (req, res) => {
+  //ensure the the id in req path and the req body match
+  if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = `Request path id (${req.params.id}) and request body id
+    (${req.body.id}) must match`;
+    console.error(message);
+    return res.status(400).json({message: message});
+  }
+  const toUpdate = {};
+  const updateableFields = ['title', 'travelDate', 'coverPhoto', 'description',
+  'memories', 'words'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[fields] = req.body[field];
+    }
+  });
+
+  Entry
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(entry = res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}))
+
+ });
+  
 
 // DELETE request
 app.delete('/journal-entries/:id', (req,res) => {
-  JournalEntries.delete(req.params.id);
-  console.log(`Deleting blog post ${req.params.id}`);
-  res.status(204).end();
+  Entry
+    .findByIdAndRemove(req.params.id)
+    .then(entry => res.status(204).end())
+    .catch(err => res.status(500).json{message: 'Internal server error'})
 });
 
 

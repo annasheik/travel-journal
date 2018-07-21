@@ -96,11 +96,63 @@ function handleSignUpSuccess() {
 	$('.main-area').on('submit', '.signup', function(event) {
 		console.log('SignUp Success');
 		event.preventDefault();
+		//get values from sign up form
 		const username = $('#email').val();
 		const password = $('#password').val();
-		signUp(username, password, displayLoginPage);
-	})
+		const confirmPassword = $('#password-confirm').val();
 
+		//validate user inputs
+		  // validate user inputs
+    if (username == '')
+        alert('Must input username');
+    else if (password == '')
+        alert('Must input password');
+    else if (confirmPassword == '')
+        alert('Must re-enter password');
+    else if (password != confirmPassword)
+        alert('Passwords do not match');
+        // if valid
+        else {
+        // create the payload object (what data we send to the api call)
+        const newUserObject = {
+            username: username,
+            password: password
+        };
+        // make the api call using the payload above
+        $.ajax({
+        	type: 'POST',
+        	url: '/api/users',
+        	dataType: 'json',
+        	data: JSON.stringify(newUserObject),
+        	contentType: 'application/json'
+        })
+        // if call is successful
+        .done(function() {
+        	alert('Account created! Please, log in!')
+        	displayLoginPage();
+        })
+        //if the call is failing
+        .fail(function() {
+
+        })
+    }
+		
+	})
+}
+
+let jwt ;
+
+
+
+
+
+
+function login(username, password, callback) {
+	
+	if (user && username===user.username && user.password===password) {
+		callback(user);
+	}
+	else {callback(null)};
 }
 
 

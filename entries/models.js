@@ -9,7 +9,8 @@ const entrySchema = mongoose.Schema({
 	description: {type: String, required: true},
 	memories: {type: String, required: true},
 	words: String,
-	morePhotos: [String] 
+	morePhotos: [String],
+	username: String
 });
 
 entrySchema.methods.serialize = function() {
@@ -21,6 +22,10 @@ entrySchema.methods.serialize = function() {
 		description: this.description,
 		memories: this.memories,
 		words: this.words,
-		morePhotos: this.morePhotos
+		morePhotos: this.morePhotos,
+		username: this.username
 	};
 };
+
+const Entry = mongoose.model('Entry', entrySchema);
+module.exports = {Entry};

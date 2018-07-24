@@ -1,18 +1,4 @@
 'use strict';
-function uuid() {
-  var uuid = "", i, random;
-  for (i = 0; i < 32; i++) {
-    random = Math.random() * 16 | 0;
-
-    if (i == 8 || i == 12 || i == 16 || i == 20) {
-      uuid += "-"
-    }
-    uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
-  }
-  return uuid;
-}
-
-
 
 
 // LOGIN PAGE
@@ -132,8 +118,9 @@ function handleSignUpSuccess() {
         	displayLoginPage();
         })
         //if the call is failing
-        .fail(function() {
-
+        .fail(function(err) {
+        	console.error(err)
+        	alert('Sign up error')
         })
     }
 		
@@ -194,19 +181,74 @@ function displayUserDashboard(journalEntries) {
 	$('.main-area').html(userDashboard);
 }
 
-function getUserDashboard() {
-    journalEntriesStorage.get(displayUserDashboard);
+function getUserDashboard(user) {
+	    
 
+      $.ajax({
+      	type: 'GET',
+      	url: '/api/entries',
+      	dataType: 'json',
+      	contentType: 'application/json',
+      	headers: {
+            Authorization: `Bearer ${jwt}`
+        },
+      })
+      .done(function(result) {
+      	console.log(result)
+      	displayUserDashboard(result.entries)
+      })
+      .fail(function(err) {
+      	console.err(err);
+      })
+      	
 }
+
 
 function handleLoginSuccess() {
 	$('.main-area').on('submit', '.login', function(event) { 
 		console.log('Login Success');
 		event.preventDefault();
+		// Get the inputs from the user in Log In form
 		const username = $('#email').val();
 		const password = $('#password').val();
-		login(username, password, getUserDashboard);
+
+		// validate the input
+		 if (username == "") {
+        	alert('Please input user name');
+   		 } else if (password == "") {
+        	alert('Please input password');
+    }
+    	// if the input is valid
+    else {
+        // create the payload object (what data we send to the api call)
+        const loginUserObject = {
+            username: username,
+            password: password
+        };
+        console.log(loginUserObject);
+        $.ajax({
+        	type: 'POST',
+        	url: '/api/auth/login',
+        	dataType: 'json',
+        	data: JSON.stringify(loginUserObject),
+        	contentType: 'application/json'
+        })
+ 		// if call is successfull
+ 		.done(function(token) {
+ 			jwt = token.authToken;
+ 			
+ 			console.log(jwt);
+ 			console.log(token)
+ 			console.log(loginUserObject.username )
+ 			getUserDashboard(loginUserObject.username)
+ 		})
+ 		//if call is failing
+ 		.fail(function(err) {
+ 			console.error(err);
+ 		});
+	};
 	});
+
 }
 
 
@@ -253,7 +295,10 @@ function renderAddEditEntry (entry=null) {
 				${entry ? `value="${entry.travelDate}"` : ""}>
 			</div>
 			<div class="entry-photo" id = "entry-photo">
-				<input type="file" accept=".jpg, .jpeg, .png" id="main-image" ${entry ? `value="${entry.coverPhoto}"` : ""}>
+				<input type="text" name="entry-photo" id="main-image" ${entry ? ` value="${entry.coverPhoto}"` : 
+				`placeholder="Image link"`}>
+				<p>*If you want to add an image but don't have a link, you can upload an 
+				image at imgbb.com to get one. <a href ="https://imgbb.com/">Click here</a> for instructions to upload to imgur</p>
 			<div class="entry-description">
 				<input type="text" name="entry-description" id="journal-description" 
 				placeholder="Add description of your trip here..." ${entry ? `value="${entry.description}"` : ""}>
@@ -297,14 +342,15 @@ function handleAddEditButtons() {
 }
 
 function handleEditButton() {
-	$('.main-area').on('click', '#js-edit-button', function(event) {
-		console.log('Edit button clicked')
+	$('.main-area').on('click', '#js-edit-button', function() {
+		console.log('Edit entry clicked');
 		const id = $(this).data("entryid");
-		journalEntriesStorage.get(displayAddEditEntry, id);
-
 		
+	    
+        getEachEntry(id, displayAddEditEntry)
 	})
 }
+
 
 function renderEachEntry(entry) {
 		console.dir(entry);
@@ -363,16 +409,34 @@ function displayEachEntry(entry) {
 	$('.main-area').html(eachEntry);
 }
 
-function getEachEntry(id) {
+function getEachEntry(id, callback) {
 	console.log(id);
-	journalEntriesStorage.get(displayEachEntry, id);
+	//journalEntriesStorage.get(displayEachEntry, id);
+	 $.ajax({
+      	type: 'GET',
+      	url: `/api/entries/${id}`,
+      	dataType: 'json',
+      	contentType: 'application/json',
+      	headers: {
+            Authorization: `Bearer ${jwt}`
+        },
+      })
+      .done(function(entry) {
+      	callback(entry);
+      })
+      .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+      })
 }
 
 function handleEntryClick() {
  	$('.main-area').on('click', '.entry-title a', function() {
  		console.log('Individual entry clicked');
  		const id = $(this).data("entryid");
- 		getEachEntry(id);
+
+ 		getEachEntry(id, displayEachEntry);
  	})
 }
 
@@ -387,15 +451,37 @@ function handleCancelButton() {
 
 //DELETE button
 function deleteEntry(id) {
-	journalEntriesStorage.delete(getUserDashboard, id);
+	//journalEntriesStorage.delete(getUserDashboard, id);
+
+	 $.ajax({
+            type: 'DELETE',
+            url: `/api/entries/${id}`,
+            dataType: 'json',
+            contentType: 'application/json',
+            headers: {
+            Authorization: `Bearer ${jwt}`
+        	}
+        })
+        //if call is succefull
+        .done(function() {
+            console.log("Deleting entry")
+            getUserDashboard();
+            
+        })
+        //if the call is failing
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 }
 
 function handleDeleteButton() {
 	$('.main-area').on('click', '#js-delete-button', function() {
 		console.log('Delete button clicked');
 		const id = $(this).data('entryid');
-     	const result = confirm("Are you sure you want to delete this?");
-        if (result) {
+     	const confirmDelete = confirm("Are you sure you want to delete this?");
+        if (confirmDelete) {
         deleteEntry(id);
 	}
 	})
@@ -404,13 +490,61 @@ function handleDeleteButton() {
 
 function saveEntry(newEntry) {
 	console.log(newEntry);
-	journalEntriesStorage.update(getUserDashboard, newEntry);
+	//journalEntriesStorage.update(getUserDashboard, newEntry);
+	$.ajax({
+      	type: 'PUT',
+      	url: `/api/entries/${newEntry.id}`,
+      	dataType: 'json',
+      	contentType: 'application/json',
+      	data: JSON.stringify(newEntry),
+
+      	headers: {
+            Authorization: `Bearer ${jwt}`
+        },
+      })
+	.done(function() {
+		getUserDashboard()
+	})
+	.fail(function(jqXHR, error, errorThrown) {
+        console.error(jqXHR);
+        console.error(error);
+        console.error(errorThrown);
+	
+	})
 }
  
 function createEntry(title, travelDate, coverPhoto, description, memories,
 		words, morePhotos) {
-	journalEntriesStorage.create(getUserDashboard, title, travelDate, coverPhoto, description, memories,
-		words, morePhotos);
+	//journalEntriesStorage.create(getUserDashboard, title, travelDate, coverPhoto, description, memories,
+	//	words, morePhotos);
+	const newEntry = { 
+		title,
+        travelDate,
+        coverPhoto,
+        description,
+        memories,
+        words,
+        morePhotos
+        }
+	$.ajax({
+      	type: 'POST',
+      	url: '/api/entries',
+      	dataType: 'json',
+      	contentType: 'application/json',
+      	data: JSON.stringify(newEntry),
+
+      	headers: {
+            Authorization: `Bearer ${jwt}`
+        },
+      })
+	.done(function() {
+		getUserDashboard()
+	})
+	.fail(function(jqXHR, error, errorThrown) {
+        console.error(jqXHR);
+        console.error(error);
+        console.error(errorThrown);
+	})
 }
 
 function handleSaveButton () {
@@ -430,7 +564,7 @@ function handleSaveButton () {
 		words, morePhotos);
 		}
 		else {
-	    id = $(this).data("entryid");
+	    const id = $(this).data("entryid");
 	     
 		const newEntry = { 
 		id,

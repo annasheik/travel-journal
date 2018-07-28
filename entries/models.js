@@ -9,7 +9,7 @@ const entrySchema = mongoose.Schema({
 	description: {type: String, required: true},
 	memories: {type: String, required: true},
 	words: String,
-	morePhotos: [String],
+	morePhotos: Array,
 	username: String
 });
 

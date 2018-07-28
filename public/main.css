@@ -173,12 +173,15 @@ label {
     padding-top: 200px;
 
 }
-.entry a,  .entry-photo a{
+.entry a{
 	color: black;
     font-size: 38px;
     text-decoration: none;
     border-bottom: 1px solid black;
     text-transform: uppercase;   
+}
+.entry-photo a{
+    color: black;
 }
 h4 {
 	font-style: italic;
@@ -214,8 +217,10 @@ input#travel-date {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 200px;
+    padding-top: 150px;
     margin-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 input#journal-description, input#entry-best-memory, input#entry-foreign-words {
 	width: 600px;
@@ -223,6 +228,13 @@ input#journal-description, input#entry-best-memory, input#entry-foreign-words {
     margin-bottom: 15px;
     border: none;
     border-bottom: 1px solid gray;
+}
+input#main-image {
+    width: 80%;
+}
+.main-image-a {
+    font-size: 16px;
+    text-transform: none;
 }
 .save, .cancel, .edit, .delete {
 	width: 99px;
@@ -245,7 +257,14 @@ h5 a {
 div.entry-description {
     margin-top: 219px;
 }
+input#morePhotos-0, input#morePhotos-1, input#morePhotos-2 {
+    display: block;
+    margin-bottom: 20px;
+    width: 500px;
+}
+
  /* EACH INDIVIDUAL ENTRY */
+
 
 
 .journal-entry {
@@ -290,11 +309,15 @@ h5 {
 }
 img.more-photos {
 	width: 600px;
+    margin-bottom: 40px;
 
 }
 .plus {
     font-size: 25px;
     font-weight: 800;
+}
+div.more-photos {
+    margin-bottom: 70px;
 }
 
 /*List of entries */

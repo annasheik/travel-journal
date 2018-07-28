@@ -1,5 +1,28 @@
 'use strict';
 
+//Authentication
+
+function rememberLogIn() {
+  $(document).ready(function() {
+    if (sessionStorage.getItem('authToken')) {
+      $.ajax({
+        type: "POST",
+        url: "/api/auth/refresh",
+        dataType: 'json',
+        contentType: "application/json",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
+        },
+        success: function(res) {
+          console.log(res);
+          jwt = res.authToken;
+          sessionStorage.setItem('authToken', jwt);
+          getUserDashboard(sessionStorage.getItem('username'))
+        }
+      })
+    }
+  })
+}
 
 // LOGIN PAGE
 function renderLoginPage() {
@@ -120,7 +143,7 @@ function handleSignUpSuccess() {
         //if the call is failing
         .fail(function(err) {
         	console.error(err)
-        	alert('Sign up error')
+        	alert(`Sign up error: ${err.responseJSON.message}`)
         })
     }
 		
@@ -211,7 +234,7 @@ function handleLoginSuccess() {
 		// Get the inputs from the user in Log In form
 		const username = $('#email').val();
 		const password = $('#password').val();
-
+		  
 		// validate the input
 		 if (username == "") {
         	alert('Please input user name');
@@ -234,13 +257,16 @@ function handleLoginSuccess() {
         	contentType: 'application/json'
         })
  		// if call is successfull
- 		.done(function(token) {
- 			jwt = token.authToken;
- 			
+ 		.done(function(data) {
+ 			jwt = data.authToken;
+ 			  sessionStorage.setItem('authToken', jwt);
+ 			  sessionStorage.setItem('username', loginUserObject.username);
+ 			  console.log(sessionStorage.getItem('authToken'))
  			console.log(jwt);
- 			console.log(token)
+ 			console.log(data)
  			console.log(loginUserObject.username )
  			getUserDashboard(loginUserObject.username)
+
  		})
  		//if call is failing
  		.fail(function(err) {
@@ -288,7 +314,7 @@ function renderAddEditEntry (entry=null) {
 		<section class="edit-entry">
 			<div class="entry-title">
 				<input type="text" name="journal-title" id="journal-title" placeholder="Name your trip here" maxlength="70" type="text" 
-				${entry ? `value="${entry.title}"` : ""}>
+				${entry ? `value="${entry.title}"` : ""} required>
 			</div>
 			<div class="entry-date">
 				<input type="text" name="travel-date" id="travel-date" placeholder="Enter the date of trip"
@@ -297,8 +323,8 @@ function renderAddEditEntry (entry=null) {
 			<div class="entry-photo" id = "entry-photo">
 				<input type="text" name="entry-photo" id="main-image" ${entry ? ` value="${entry.coverPhoto}"` : 
 				`placeholder="Image link"`}>
-				<p>*If you want to add an image but don't have a link, you can upload an 
-				image at imgbb.com to get one. <a href ="https://imgbb.com/">Click here</a> for instructions to upload to imgur</p>
+				<p class="main-image-p">*If you want to add an image but don't have a link, you can upload an 
+				image at imgbb.com to get one. <a class="main-image-a" href ="https://imgbb.com/">Click here</a> for instructions</p>
 			<div class="entry-description">
 				<input type="text" name="entry-description" id="journal-description" 
 				placeholder="Add description of your trip here..." ${entry ? `value="${entry.description}"` : ""}>
@@ -314,9 +340,13 @@ function renderAddEditEntry (entry=null) {
 				${entry ? `value="${entry.words}"` : ""}>
 			</div>
 			<div class="more-photos">
-				<p>Add more photos here</p>
-				<input type="file" name="pic" accept="image/*">
-				
+				<h5>Add more photos here</h5>
+				<input type="text" name="morePhotos" id="morePhotos-0" ${entry && entry.morePhotos[0] ? ` value="${entry.morePhotos[0]}"` : 
+				`placeholder="Image link"`}>
+				<input type="text" name="morePhotos" id="morePhotos-1" ${entry && entry.morePhotos[1] ? ` value="${entry.morePhotos[1]}"` : 
+				`placeholder="Image link"`}>
+				<input type="text" name="morePhotos" id="morePhotos-2" ${entry && entry.morePhotos[2] ? ` value="${entry.morePhotos[2]}"` : 
+				`placeholder="Image link"`}>
 			</div>
 		</section>
 		</form>	
@@ -392,11 +422,13 @@ function renderEachEntry(entry) {
 				</p>
 			</div>
 			<div class="more-photos">
+
 			${entry.morePhotos.map(function(photoUrl) {
 				return `
-				<img src="${photoUrl}">
+				<img class="more-photos" src="${photoUrl}">
 				`
 			}).join('\n')}
+			</div>
 		</section>	
 	</main>
 	`
@@ -489,7 +521,7 @@ function handleDeleteButton() {
 // SAVE BUTTON
 
 function saveEntry(newEntry) {
-	console.log(newEntry);
+	console.log(JSON.stringify(newEntry));
 	//journalEntriesStorage.update(getUserDashboard, newEntry);
 	$.ajax({
       	type: 'PUT',
@@ -557,7 +589,11 @@ function handleSaveButton () {
         let description = $('#journal-description').val();
         let memories = $('#entry-best-memory').val();
         let words = $('#entry-foreign-words').val();
-        let morePhotos = ['', ''];
+        let morePhotos = [$('#morePhotos-0').val(), $('#morePhotos-1').val(), $('#morePhotos-2').val()];
+       // $('#more-photos').val().map(function(photoUrl) {
+		//		return morePhotos.push(photoUrl);
+		//	});
+        console.log(morePhotos);
 
 		if ($(this).data("entryid") === undefined) {
 			createEntry(title, travelDate, coverPhoto, description, memories,
@@ -585,14 +621,20 @@ function handleSaveButton () {
 function handleLogOutButton() {
 	$('.main-area').on('click', '.js-logout-button', function(event) {
 		event.preventDefault();
-		console.log('Logged out!')
-		const username = null;
-		const password = null;
-
+		console.log('Logged out!');
+		jwt = null;
+		sessionStorage.clear();
 		location.reload();
 	})
 }
 
+// SET UP HOME button
+	function handleHomeButton() {
+	$(".home-button").on("click", function() {
+	//displayUserDashboard()
+	  location.reload();
+})
+}
 
 function setUpEventHandlers() {
 	handleLoginButton();
@@ -606,13 +648,11 @@ function setUpEventHandlers() {
 	handleCancelButton();
 	handleDeleteButton();
 	handleSaveButton();
+	handleLogOutButton();
+	handleHomeButton()
+	rememberLogIn();
+
+
 }
-
-
-
-
-
-
-// SET UP HOME BUTTON?
 
 $(setUpEventHandlers);

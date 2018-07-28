@@ -2,6 +2,7 @@
 
 //Authentication
 
+
 function rememberLogIn() {
   $(document).ready(function() {
     if (sessionStorage.getItem('authToken')) {
@@ -33,6 +34,8 @@ function renderLoginPage() {
 					<div class="login-header">
 						<legend>Log In</legend>
 				    </div>
+				          <p id='notification'></p>
+
 					<label for="email" required>Email</label>
 					<input type="email" name="email" id="email" placeholder="Email address" required="">
 					<label for="password" required>Password</label>
@@ -41,6 +44,13 @@ function renderLoginPage() {
 				<button type="submit" class="js-login-button">Login</button>
 				<p>Don't have an account? <a href="" class ="nav-signup">Sign up</a></p>
 			</form>
+			<div class="demo-account"> 
+				<p>Demo account:</p>
+				<ul>
+             	 <li>Username: demo@gmail.com</li>
+             	 <li>Password: password</li>
+           	   </ul>
+           	   </div>
 		</section> `
 }
 
@@ -71,6 +81,8 @@ function renderSignupPage() {
 					<div class="login-header">
 						<legend>Sign Up</legend>
 				    </div>
+				          <p id='notification'></p>
+
 					<label for="email" required>Email</label>
 					<input type="email" name="email" id="email" placeholder="Email address" required="">
 					<label for="password" required>Password</label>
@@ -271,6 +283,8 @@ function handleLoginSuccess() {
  		//if call is failing
  		.fail(function(err) {
  			console.error(err);
+ 			$('#notification').html('Login failed. Try again or click below to sign up!')
+
  		});
 	};
 	});
@@ -656,3 +670,4 @@ function setUpEventHandlers() {
 }
 
 $(setUpEventHandlers);
+

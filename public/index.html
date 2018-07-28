@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<title>Travel e-Journal</title>
+
+
 	<link rel="stylesheet" type="text/css" href="normalize.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<script
@@ -10,12 +12,14 @@
   crossorigin="anonymous"></script>	
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
 	<meta charset="utf-8">
 	<meta name="description" content="Create a beautiful travel journal">
 	<meta name="keywords" content="travel journal, online travel journal, travel diary, online travel
 	diary, travel blog">
 	<meta name="author" content="Anna Kremer">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, minimum-scale=1">
+	
 </head>
 
 <body>
@@ -30,7 +34,7 @@
 	<div class="nav-bar main-nav-bar">
 		<div class="nav-1">
 			<div class="nav-link"><a class="nav-login" href="">Log In</a></div>
-			<div class="nav-link"><a href="" class="nav-signup">Sign Up</a></div>
+			<div class="nav-link nav-2"><a href="" class="nav-signup">Sign Up</a></div>
 		</div>         
 	</div>
 	
@@ -38,7 +42,7 @@
 
 	<main role="main" id="main-page">
 		<div class="landing-page">
-			<div class="banner-photo">
+			<div class="banner-photo" id="banner">
 				<h2 class="main-title">The memories that last forever</h2>
 				<div class="signup-button"><a href="" class="nav-signup">Sign Up</a></div>
 			</div>
@@ -60,6 +64,11 @@
 					
 					<img src="photos/photo-4.jpg" class="landing-page-photos">
 				</div>
+
+				<div class="scrolltop">
+			<a class="scroll" href="#banner" aria-label="return to the top of the page">
+				<i class="fas fa-angle-double-up"></i>
+			</a>	
 			</section>
 	</div>
 	</main>

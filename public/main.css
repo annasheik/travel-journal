@@ -22,8 +22,9 @@ h1 {
     left: 11px;
     z-index: 100;
 }
-.home-button a {
+div.home-button a {
 	color: #c3c3c3a6;
+    font-size: 22px;
 }
 i.fa.fa-home {
 	font-size: 26px;
@@ -66,8 +67,10 @@ i.fa.fa-home {
 	background: url(photos/banner-photo.jpeg) no-repeat center top;
     height: 734px;
     background-size: 100%;
-    text-align: center
+    text-align: center;
+    background-attachment: fixed;
 }
+
 .main-title {
 	padding-top: 145px;
     color: white;
@@ -149,7 +152,164 @@ label {
 	cursor: pointer;
 	background-color: #a9a9a9bf;
 }
+#notification {
+  font-size: 16px;
+  color: #e60000;
+  margin: 0 10px 0 10px;
+}
+.demo-account {
+    width: 300px;
+    margin: 40px 0 40px 0;
+    display: inline-block;
+}
+.demo-account ul {
+    text-align: left;
+}
 
+/* SMALLER SCREENS */
+
+@media only screen and (max-width: 560px) {
+    
+    .logo-bar {
+    height: 42px;
+    width: 101%;   
+    }
+    .nav-link {
+    border-right: 1px solid #E5E5E5;
+    border-left: none;
+    height: 36px;
+    font-size: 1em;
+    width: 49%;
+    }
+    .nav-2 {
+        border-right: none;
+    }
+    .banner-photo {
+    height: 318px;
+    background-size: 213%;
+    }
+    h3 {
+    font-size: 22px;
+    }
+    .website-description p {
+    font-size: 16px;
+    }
+    .img-container img {
+    width: 93%;
+    }
+    .main-title {
+    padding-top: 28%;
+    color: white;
+    font-size: 21px;
+    font-weight: 800;
+    }
+    .login-header {
+    margin-top: 26px;
+    font-size: 27px;
+    margin-bottom: 35px;
+    }
+    .demo-account {
+    margin: -10px 0 40px 0;
+    }
+    input[type="email"], input[type="password"] {
+        width: 80%
+    }
+    .nav-1 a {
+    font-size: 14px;
+    }
+    .nav-link {
+        width: 33.33%;
+    }
+    /* Dashboard */
+    div.dashboard-header {
+    margin-top: 35px;
+    width: 80%;
+    font-size: 20px;
+    }
+    .trip-entries h4 {
+    margin-top: -40px;
+    font-size: 20px;
+    }
+    div.entry {
+    height: 200px;
+    width: 90%;
+    padding-top: 20%;
+    }
+    div.entry a {
+        font-size: 30px;
+    }
+    h5.entry-title {
+        margin-top: 20px;
+    }
+    img.main-entry-photo {
+        width: 90%;
+        height: auto;
+        margin-top: 0;
+    }
+    .trip-entries ul {
+        margin-left: -25px;    
+    }
+    #js-save-button, #js-cancel-button,
+    #js-edit-button, #js-delete-button {
+        background-color: white;
+    
+    }
+    #js-save-button, #js-edit-button {
+        border-right: 1px solid #E5E5E5;
+        border-left: none;
+    }
+    #js-cancel-button, #js-delete-button {
+        border-right: none;  
+    }
+    
+    #entry-photo {
+        width: 90%;
+        height: 262px;
+        padding-top: 78px;
+    }
+   div.entry-title {
+    width: 90%;
+    font-size: 20px;
+    margin-top: 1px;
+   }
+   div.entry-date {
+    width: 90%;
+    font-size: 18px;
+   }
+   div.entry-description {
+    margin-top: 99px;
+    }
+    p.entry-date {
+        width:90%;
+    }
+    div.main-entry-description, div.main-best-memory, div.main-foreign-words, div.more-photos {
+    margin-top: 32px;
+    width: 90%;
+    }
+    .more-photos img.more-photos {
+        width: 90%;
+    }
+    .each-entry div.more-photos {
+        width: 90%;
+    }
+}
+/*MEDIUM SIZE SCREENS*/
+@media only screen and (min-width: 561px) and (max-width: 900px) {
+    div.nav-link{
+        width: 35%;
+    }
+    .banner-photo {
+    height: 424px;
+    background-size: 156%;
+    }
+    h2.main-title {
+        padding-top: 121px;
+    }
+    div.nav-link {
+        width: 28%;
+    }
+
+}
 /* USER DASHBOARD*/
 .user-dashboard {
 	text-align: center;
@@ -262,6 +422,18 @@ input#morePhotos-0, input#morePhotos-1, input#morePhotos-2 {
     margin-bottom: 20px;
     width: 500px;
 }
+#js-save-button, #js-cancel-button,
+    #js-edit-button, #js-delete-button {
+        background-color: white;
+    
+    }
+    #js-save-button, #js-edit-button {
+        border-right: 1px solid #E5E5E5;
+        border-left: none;
+    }
+    #js-cancel-button, #js-delete-button {
+        border-right: none;  
+    }
 
  /* EACH INDIVIDUAL ENTRY */
 
@@ -336,3 +508,45 @@ div.best-memory, div.foreign-words {
     margin-right: auto;
 }
 
+/* Back to top */
+div.scrolltop {
+    margin-top: 17px;
+    margin-bottom: 30px;
+}
+
+.fa-angle-double-up {
+  font-size: 35px !important;
+  color: gray;
+  position: relative;
+  
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: blinker;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  animation-name: blinker;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+  0% { opacity: 0.7; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.7; }
+}
+
+@-webkit-keyframes blinker {  
+  0% { opacity: 0.7; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes blinker {  
+  0% { opacity: 0.7; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.7; }
+}

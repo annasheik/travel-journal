@@ -1,8 +1,7 @@
 'use strict';
+let jwt ;
 
 //Authentication
-
-
 function rememberLogIn() {
   $(document).ready(function() {
     if (sessionStorage.getItem('authToken')) {
@@ -28,7 +27,7 @@ function rememberLogIn() {
 // LOGIN PAGE
 function renderLoginPage() {
 	return `
-		<section class="login-screen">
+		<section class="login-screen" aria-live="assertive">
 			<form role="form" class="login">
 				<fieldset name="login-info">
 					<div class="login-header">
@@ -68,14 +67,11 @@ function handleLoginButton () {
 	})
 }
 
-
-
-
 // SIGNUP PAGE
 
 function renderSignupPage() {
 	return `
-	<section class="signup-page-screen">
+	<section class="signup-page-screen" aria-live="assertive">
 			<form role="form" class="signup">
 				<fieldset name="signup-info">
 					<div class="login-header">
@@ -160,21 +156,6 @@ function handleSignUpSuccess() {
     }
 		
 	})
-}
-
-let jwt ;
-
-
-
-
-
-
-function login(username, password, callback) {
-	
-	if (user && username===user.username && user.password===password) {
-		callback(user);
-	}
-	else {callback(null)};
 }
 
 
@@ -298,8 +279,7 @@ function handleMyJournalButton() {
 		console.log('My Journal button clicked');
 		event.preventDefault();
 		$('.landing-page').prop('hidden', true);
-		getUserDashboard();
-		
+		getUserDashboard();	
 	});
 }
 

@@ -97,7 +97,12 @@ section.edit-entry {
 	color: white;
 	text-transform: uppercase;
 }
-
+form.login {
+    text-align: center;
+}
+legend {
+    text-align: center;
+}
 /* MAIN*/
 .website-description {
 	text-align: center;
@@ -175,7 +180,22 @@ label {
 /* SMALLER SCREENS */
 
 @media only screen and (max-width: 560px) {
-    
+   input#journal-title, input#travel-date,
+   input#journal-description, input#entry-best-memory, 
+   input#entry-foreign-words, #js-edit-form div.more-photos, div.best-memory, div.foreign-words,
+   input#morePhotos-0, input#morePhotos-1, input#morePhotos-2 {
+    width: 99% !important;
+    text-align: left;
+    }
+    section.edit-entry div.entry-description {
+    margin-top: 112px;
+     }
+     section.trip-entries h5.entry-title,
+section.each-entry h5.entry-title
+     {
+        width: 90%;
+     }
+
     .logo-bar {
     height: 42px;
     width: 101%;   
@@ -219,6 +239,9 @@ label {
     }
     input[type="email"], input[type="password"] {
         width: 80%
+    }
+    input[type="text"]  {
+            width: 90%;
     }
     .nav-1 a {
     font-size: 14px;
@@ -292,8 +315,9 @@ label {
     margin-top: 32px;
     width: 90%;
     }
-    .more-photos img.more-photos {
+    div.more-photos img.more-photos {
         width: 90%;
+        text-align: center;
     }
     .each-entry div.more-photos {
         width: 90%;
@@ -316,6 +340,7 @@ label {
     }
 
 }
+
 /* USER DASHBOARD*/
 .user-dashboard {
 	text-align: center;

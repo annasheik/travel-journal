@@ -22,7 +22,9 @@ User Dashboard:
 ![entry](screenshots/6.png)
 
 Mobile Application/ Fully responsive
-![venues page](screenshots/7.png | width=100)
+<img src="screenshots/7.png" width="300">
+
+
 
 ## Built With
 ## Front End 

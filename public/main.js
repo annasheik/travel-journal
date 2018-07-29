@@ -31,7 +31,7 @@ function renderLoginPage() {
 			<form role="form" class="login">
 				<fieldset name="login-info">
 					<div class="login-header">
-						<legend>Log In</legend>
+						<legend align="center">Log In</legend>
 				    </div>
 				          <p id='notification'></p>
 

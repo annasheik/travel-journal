@@ -19,7 +19,8 @@ Login Page:
 User Dashboard:
 ![user dashboard](screenshots/5.png)
 
-![Entry](screenshots/6.png)
+![entry](screenshots/6.png)
+
 Mobile Application/ Fully responsive
 ![venues page](screenshots/7.png)
 

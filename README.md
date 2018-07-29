@@ -23,15 +23,14 @@ User Dashboard:
 Mobile Application/ Fully responsive
 ![venues page](screenshots/7.png)
 
-# Built With
+## Built With
+## Front End 
 
-##Front End
 - HTML5
 - CSS
 - jQuery
 - JavaScript
-
-##Back end
+## Back end
 
 - Node.js
 - Express.js

@@ -29,6 +29,9 @@ div.home-button a {
 i.fa.fa-home {
 	font-size: 26px;
 }
+.login-header {
+    text-align: center;
+}
 
 /*NAVIGATION BAR */
 .nav-1 {
@@ -60,6 +63,9 @@ i.fa.fa-home {
     font-size: 1em;
     width: 20%;
     margin-right: -5px;
+}
+section.edit-entry {
+    margin-bottom: 40px;
 }
 
 /* BANNER PHOTO */

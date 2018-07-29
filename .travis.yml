@@ -4,7 +4,7 @@ services:
 - mongodb
 deploy:
   provider: heroku
-  api_key:
+  api_key: 33330dd3-5f84-4fdf-bcf3-bca7d63d956c
     secure: KPQiNgvVlv1H8QoEJm58D5sLIoubhwpB8K7SqOy/vDv9TSRXIkVCTH75Dcn01GwVlDdElpF/AapPvhQeoDXQM/A9du+QNe/gqrJ/LQr5TF1vKr7ECi3BWqNGLSBBDDHdZKUVVYZA8KjZiTVW5j2XCPY4Tzj9NkaVm+UWwkLlE/LfTIccOD9lldxXz8no6vvpxuIvjD2hPOLevvLqrZuTJXK8Rtw+MdqFT7C+yUD7mWMXeXeNXeJM7XnKx6SQBbaJfqmAFH2U5omZRYRGdfPbyKdc/dIX1Y564GKHZVFi4rGpb0wzVWwY8uJSFmuv3PhkkdbssSvcS5i2c5A5Ny9LyfuZJDI9GuawN4xMbof7wEjTFfL0lOL9wghmGQsLd7h+dNXGfhZ6wRMYoJe1ZFTy4b/fE1mUyXsn3zRs66nNTSyArRzNMktQdOBbMNwmK8s40pKThJb8VH9X6xqpRcuTEpV+bVN6f7LGHEKdieGQBDdhJ+lCxPWB4YJv+hpV1j9QfU6j+Gkwmi/xHotcTqdPnubO6Rw31lVuB6WhUdHFZj6tjntsJVqW+Vz+64ljEQpcz5UtxfzxwvAjVDBxqZ/DT1cDBD6ys9/5YkMF2rCwcxXSkoRZIEYTKuHs3gAmXVpnAYyaCNwIcWlt6Ji7arUZ4g3fl/mIUEcfysUh1W1K3to=
   app: travel-journal-app
   on:

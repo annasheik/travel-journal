@@ -24,12 +24,15 @@ Mobile Application/ Fully responsive
 ![venues page](screenshots/7.png)
 
 ## Built With
+
 ##Front End
 - HTML5
 - CSS
 - jQuery
 - JavaScript
+
 ##Back end
+
 - Node.js
 - Express.js
 - Mocha

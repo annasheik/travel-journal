@@ -33,8 +33,7 @@ Mobile Application/ Fully responsive
 - CSS
 - jQuery
 - JavaScript
-- Enzyme
-- React/Redux
+
 
 ## Back end
 
